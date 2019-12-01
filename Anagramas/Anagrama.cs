@@ -9,36 +9,46 @@ namespace Anagramas
         internal List<string> DevolveAnagramas(string palavraBase)
         {
             List<string> anagrama = new List<string>();
-            int pivo;
+            int pivo, anterior;
             int ultimoIndice = palavraBase.Length - 1;
             int ponteiro = ultimoIndice;
             char[] palavraTemp = palavraBase.ToCharArray();
+            string palavraChave;
 
             for (int i = 0; i < palavraBase.Length; i++)
             {
-                // anagrama.Add(ConverteCharrArrayParaString(palavraTemp));
                 pivo = 0;
+                palavraChave = ConverteCharArrayParaString(palavraTemp);
+                anagrama.Add(ConverteCharArrayParaString(palavraTemp));
 
-                for (int j = 1; j < palavraBase.Length; j++)
+                int j = 0;
+                do
                 {
-                    if (ponteiro - 1 == pivo)
+                    anterior = ponteiro - 1;
+
+                    if (anterior == pivo)
                     {
                         // Reinicia passo de troca
-                        pivo++;
+                        j++;
                         ponteiro = ultimoIndice;
                     }
                     else
                     {
                         // Troca letra com a anterior
-                        char temp = palavraTemp[ponteiro - 1];
-                        palavraTemp[ponteiro - 1] = palavraTemp[ponteiro];
-                        palavraTemp[ponteiro] = temp;
+                        TrocaLetras(palavraTemp, anterior, ponteiro);
 
                         ponteiro--;
-                    }
 
-                    anagrama.Add(ConverteCharrArrayParaString(palavraTemp));
-                }
+                        if (palavraChave.Equals(ConverteCharArrayParaString(palavraTemp)))
+                        {
+                            TrocaLetras(palavraTemp, 0, i + 1);
+
+                            break;
+                        }
+
+                        anagrama.Add(ConverteCharArrayParaString(palavraTemp));
+                    } 
+                } while (j < palavraBase.Length);
             }
 
             return anagrama;
@@ -56,7 +66,17 @@ namespace Anagramas
             return tamanho * CalculaQuantidadeAnagramas(tamanho - 1);
         }
 
-        private string ConverteCharrArrayParaString(char[] charArray)
+        private void TrocaLetras(char[] palavra, int indiceLetra1, int indiceLetra2)
+        {
+            if (indiceLetra2 < palavra.Length)
+            {
+                char temp = palavra[indiceLetra1];
+                palavra[indiceLetra1] = palavra[indiceLetra2];
+                palavra[indiceLetra2] = temp;
+            }
+        }
+
+        private string ConverteCharArrayParaString(char[] charArray)
         {
             string text = string.Empty;
 

@@ -42,8 +42,8 @@ namespace Anagramas
         public void Deve_retornar_anagramas_validos()
         {
             // Arange
-            string palavraBase = "BOLA";
-            string anagramaEsperado = "BOLA";
+            string palavraBase = "Gabriel";
+            string anagramaEsperado = "Gabriel";
             Anagrama anagrama = new Anagrama();
 
             // Act
