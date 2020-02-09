@@ -70,5 +70,11 @@ namespace MundoPequeno
             // Assert
             amigoEncontrado.Should().Be(amigoEsperado);
         }
+
+        [Fact]
+        public void AtualizarPosicao_deve_alterar_posicao_atual_com_base_no_amigo_visitado()
+        {
+            // TODO:
+        }
     }
 }
