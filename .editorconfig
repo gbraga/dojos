@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA1707: Identificadores não devem conter sublinhados
+dotnet_diagnostic.CA1707.severity = none
